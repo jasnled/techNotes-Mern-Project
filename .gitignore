@@ -215,5 +215,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 # others
-.Youtube
+.Youtube/
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,node
