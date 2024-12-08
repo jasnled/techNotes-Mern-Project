@@ -1,12 +1,21 @@
 const express = require('express');
 const app = express();
 const path = require('path'); 
+const errorHandler = require('./middleware/errorHandler.js');
 const { logger } = require('./middleware/logger.js');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const corsOptions = require('./config/corsOptions.js');
 const PORT = process.env.PORT || 3500;
+
 
 app.use( logger );
 
+app.use(cors(corsOptions));
+
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, '/public')));
 
@@ -24,5 +33,10 @@ app.all('*', (req, res)=>{
         console.log('else if');
     }
 });
+
+app.use(errorHandler); // errorHandler is passed just before to tell to the app start listenning
+
+
 app.listen(PORT, ()=>{console.log(`listing on port ${PORT}`)});
+
 
